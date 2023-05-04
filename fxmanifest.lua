@@ -1,7 +1,7 @@
 game "gta5"
 fx_version "cerulean"
 
-author "Local9 <https://github.com/Local9/basic-fivem-iframe>"
+author "Local9 <https://github.com/Local9>"
 description "Basic iFrame resource for FiveM"
 version "1.0.0"
 
@@ -11,4 +11,7 @@ files {
   "nui/**/*",
 }
 
-client_script "client.lua"
+client_scripts {
+  "scripts/**.lua",
+  "client.lua"
+}

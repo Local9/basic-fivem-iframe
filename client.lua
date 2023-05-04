@@ -1,16 +1,29 @@
-local iframe_url = "https://example.com/";
+local iframe_url = "https://www.youtube.com/embed/QkkoHAzjnUs";
 local iframe_open = false;
 local iframe_command = "+iframeCmd";
 
+local function close()
+  Prop.DeleteProp();
+  ClearPedTasksImmediately(PlayerPedId());
+  SetNuiFocus(false, false);
+  SendNUIMessage({
+    type = "close",
+  });
+  iframe_open = false;
+end
+
 local function open()
   if iframe_open then
-    SetNuiFocus(false, false);
-    SendNUIMessage({
-      type = "close",
-    });
-    iframe_open = false;
+    close();
+    Citizen.Wait(1000);
     return;
   end
+
+  iframe_open = true;
+
+  ClearPedTasksImmediately(PlayerPedId());
+  Animation.Play();
+  Prop.CreateProp();
 
   SetNuiFocus(true, true);
   SendNUIMessage({
@@ -23,6 +36,6 @@ RegisterCommand(iframe_command, open, false);
 RegisterKeyMapping(iframe_command, "Open iFrame", "keyboard", "f10");
 
 RegisterNUICallback("close", function(data, cb)
-  SetNuiFocus(false, false);
+  close();
   cb({ ok = true });
 end)
