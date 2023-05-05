@@ -21,9 +21,10 @@ local function open()
 
   iframe_open = true;
 
-  ClearPedTasksImmediately(PlayerPedId());
-  Animation.Play();
-  Prop.CreateProp();
+  if not IsPedInAnyVehicle(PlayerPedId(), false) then
+    Animation.Play();
+    Prop.CreateProp();
+  end
 
   SetNuiFocus(true, true);
   SendNUIMessage({
