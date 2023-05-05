@@ -4,7 +4,11 @@ local iframe_command = "+iframeCmd";
 
 local function close()
   Prop.DeleteProp();
-  ClearPedTasksImmediately(PlayerPedId());
+
+  if not IsPedInAnyVehicle(PlayerPedId(), false) then
+    ClearPedTasksImmediately(PlayerPedId());
+  end
+
   SetNuiFocus(false, false);
   SendNUIMessage({
     type = "close",
