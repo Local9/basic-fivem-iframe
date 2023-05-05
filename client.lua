@@ -3,9 +3,8 @@ local iframe_open = false;
 local iframe_command = "+iframeCmd";
 
 local function close()
-  Prop.DeleteProp();
-
   if not IsPedInAnyVehicle(PlayerPedId(), false) then
+    Prop.DeleteProp();
     ClearPedTasksImmediately(PlayerPedId());
   end
 
